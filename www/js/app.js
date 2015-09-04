@@ -68,42 +68,50 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
-app.controller("MediaCtrl", function($scope, $cordovaMedia) 
+app.controller("MediaCtrl", function($scope, $cordovaMedia) { 
 
-  {
+  function tplawesome(e,t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{(.*?)\}\}/g,function(e,r){return t[n][r]})}return res}
 
-    var src = "soundPlanet/www/audio/audio.mp3";
-    var media = $cordovaMedia.newMedia(src);
-
-
-    var iOSPlayOptions = {
-      numberOfLoops: 2,
-      playAudioWhenScreenIsLocked : false
-    }
-
-    media.play(options); // iOS only!
-    media.play(); // Android
-
-    media.pause();
-
-    media.stop();
-
-    media.release();
-
-    media.seekTo(5000); // milliseconds value
-
-    media.setVolume(0.5);
-
-    media.startRecord();
-
-    media.stopRecord();
-
-    // media.getDuration(media); not working yet
-
-    // media.getCurrentPosition().then(...); not working yet
+  $(function() {
+      $("form").on("submit", function(e) {
+         e.preventDefault();
+         // prepare the request
+         var request = gapi.client.youtube.search.list({
+              part: "snippet",
+              type: "video",
+              q: encodeURIComponent($("#search").val()).replace(/%20/g, "+"),
+              maxResults: 3,
+              order: "viewCount",
+              publishedAfter: "2015-01-01T00:00:00Z"
+         }); 
+         // execute the request
+         request.execute(function(response) {
+            var results = response.result;
+            $("#results").html("");
+            $.each(results.items, function(index, item) {
+              $.get("tpl/item.html", function(data) {
+                  $("#results").append(tplawesome(data, [{"title":item.snippet.title, "videoid":item.id.videoId}]));
+              });
+            });
+            resetVideoHeight();
+         });
+      });
+      
+      $(window).on("resize", resetVideoHeight);
   });
 
-// });
+  function resetVideoHeight() {
+      $(".video").css("height", $("#results").width() * 9/16);
+  }
+
+  function init() {
+      gapi.client.setApiKey("AIzaSyDsRwiLO7a5XTXAJrGoClmuZ765NpDygHc");
+      gapi.client.load("youtube", "v3", function() {
+          // yt api is ready
+      });
+  }
+
+});
 
 
 

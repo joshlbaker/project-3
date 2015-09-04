@@ -1,9 +1,24 @@
 <ion-view view-title="Playlist">
-  <ion-content ng-controller="MediaCtrl">
-    <button class="button" ng-click="play('/soundPlanet/www/audio/audio.mp3')">Play</button>
-    <!-- <video controls class="video_content"> -->
-        <!-- <source src="video/dog.mp4" type="video/mp4"> -->
-    <!-- </video> -->
+  <ion-content>
+    <!-- <button class="button" ng-click="play('/soundPlanet/www/audio/audio.mp3')">Play</button> -->
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <!-- <img src="avatar.jpg"> -->
+        <h2>Dog</h2>
+        <p>Josh Baker</p>
+      </div>
+
+      <video controls class="video_content">
+          <source src="video/dog.mp4" type="video/mp4">
+      </video>
+
+      <a class="item item-icon-left assertive" href="#">
+        <i class="icon ion-music-note"></i>
+        Start listening
+      </a>
+
+    </div>
   </ion-content>
 </ion-view>
 
