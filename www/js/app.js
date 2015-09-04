@@ -1,21 +1,21 @@
 
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 
-$ionicPlatform.ready,
-angular.module('starter', ['ionic','ngCordova','starter.controllers'])
+// $ionicPlatform.ready,
+// angular.module('starter', ['ionic','ngCordova','starter.controllers'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+// .run(function($ionicPlatform) {
+//   $ionicPlatform.ready(function() {
  
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+//     if (window.cordova && window.cordova.plugins.Keyboard) {
+//       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+//     }
+//     if (window.StatusBar) {
+//       // org.apache.cordova.statusbar required
+//       StatusBar.styleDefault();
+//     }
+//   });
+// })
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
